@@ -13,10 +13,25 @@ use \Jf;
  */
 class Rbac
 {
-    public function __construct($unit_test = '')
+    public function __construct($config, $unit_test = '')
     {
         if ((string) $unit_test === 'unit_test') {
-            require_once dirname(dirname(__DIR__)) . '/tests/database/database.config';
+            $host=$config['host'];
+            $user=$config['user'];
+            $pass=$config['pass'];
+            $dbname=$config['dbname'];
+            
+            if (!key_exists('adapter', $config)) {
+                $adapter="pdo_mysql";
+            } else {
+                $adapter = $config['adapter'];
+            }
+            
+            if (!key_exists('tablePrefix', $config)) {
+                $tablePrefix = "";
+            } else {
+                $tablePrefix = $config['tablePrefix'];
+            }
         } else {
             require_once dirname(dirname(__DIR__)) . '/database/database.config';
         }
