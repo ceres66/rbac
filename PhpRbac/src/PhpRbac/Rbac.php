@@ -13,27 +13,23 @@ use \Jf;
  */
 class Rbac
 {
-    public function __construct($config, $unit_test = '')
+    public function __construct($config)
     {
-        if ((string) $unit_test === 'unit_test') {
-            $host=$config['host'];
-            $user=$config['user'];
-            $pass=$config['pass'];
-            $dbname=$config['dbname'];
-            
-            if (!key_exists('adapter', $config)) {
-                $adapter="pdo_mysql";
-            } else {
-                $adapter = $config['adapter'];
-            }
-            
-            if (!key_exists('tablePrefix', $config)) {
-                $tablePrefix = "";
-            } else {
-                $tablePrefix = $config['tablePrefix'];
-            }
+        $host=$config['host'];
+        $user=$config['user'];
+        $pass=$config['pass'];
+        $dbname=$config['dbname'];
+        
+        if (!key_exists('adapter', $config)) {
+            $adapter="pdo_mysql";
         } else {
-            require_once dirname(dirname(__DIR__)) . '/database/database.config';
+            $adapter = $config['adapter'];
+        }
+        
+        if (!key_exists('tablePrefix', $config)) {
+            $tablePrefix = "";
+        } else {
+            $tablePrefix = $config['tablePrefix'];
         }
 
         require_once 'core/lib/Jf.php';
